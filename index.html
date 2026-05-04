@@ -1,42 +1,925 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curriculum Vitae</title>
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; }
-        h1 { color: #333; }
-        h2 { color: #666; }
-        .container { max-width: 800px; margin: auto; padding: 20px; border: 1px solid #ccc; }
-        .section { margin-bottom: 20px; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ryan Krause — Finance Student & Digital Strategist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #185FA5;
+      --blue-light: #E6F1FB;
+      --blue-dark: #0C447C;
+      --blue-mid: #378ADD;
+      --text: #1a1a1a;
+      --text-muted: #5a5a5a;
+      --text-faint: #999;
+      --border: rgba(0,0,0,0.1);
+      --border-mid: rgba(0,0,0,0.18);
+      --surface: #f9f8f6;
+      --card: #ffffff;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(249,248,246,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-logo:hover { color: var(--blue); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+      position: relative;
+    }
+
+    .nav-links a:hover { color: var(--blue); }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--blue);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+
+    /* HERO */
+    .hero {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 6rem 2rem 5rem;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+      letter-spacing: 0.02em;
+      animation: slideInLeft 0.6s ease-out 0.1s both;
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .hero-tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(42px, 7vw, 68px);
+      line-height: 1.08;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--blue);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 580px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      animation: fadeInUp 0.8s ease-out 0.3s both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(24, 95, 165, 0.2);
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(24, 95, 165, 0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 0.5px solid var(--border-mid);
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: var(--blue-light);
+      transform: translateY(-2px);
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      animation: fadeInUp 0.8s ease-out 0.5s both;
+    }
+
+    .pill {
+      background: var(--card);
+      border: 0.5px solid var(--border);
+      color: var(--text-muted);
+      font-size: 12px;
+      padding: 5px 14px;
+      border-radius: 100px;
+      transition: all 0.3s ease;
+    }
+
+    .pill:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: var(--blue-light);
+    }
+
+    /* SECTIONS */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 5rem 0;
+      border-top: 0.5px solid var(--border);
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .sec-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.75rem;
+    }
+
+    .sec-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+
+    .sec-intro {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    /* ABOUT CARDS */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .about-card {
+      background: var(--card);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+    }
+
+    .about-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(24, 95, 165, 0.12);
+    }
+
+    .about-card-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--blue-light);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .about-card:hover .about-card-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .about-card h3 {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .about-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    .langs {
+      display: flex;
+      gap: 10px;
+    }
+
+    .lang-card {
+      background: var(--card);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 20px;
+      text-align: center;
+      min-width: 110px;
+      transition: all 0.3s ease;
+      flex: 1;
+    }
+
+    .lang-card:hover {
+      border-color: var(--blue);
+      background: var(--blue-light);
+      transform: translateY(-2px);
+    }
+
+    .lang-name { font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+    .lang-level { font-size: 11px; color: var(--text-faint); }
+
+    /* EXPERIENCE */
+    .exp-item {
+      padding: 1.75rem 0;
+      border-bottom: 0.5px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .exp-item:hover {
+      background: rgba(24, 95, 165, 0.02);
+      margin: 0 -1.5rem;
+      padding: 1.75rem 1.5rem;
+      border-radius: var(--radius-md);
+    }
+
+    .exp-item:first-of-type { padding-top: 0; }
+    .exp-item:last-of-type { border-bottom: none; padding-bottom: 0; }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 4px;
+    }
+
+    .exp-role { font-size: 15px; font-weight: 500; }
+
+    .exp-date {
+      font-size: 12px;
+      color: var(--text-faint);
+      white-space: nowrap;
+      margin-left: 1rem;
+      font-weight: 300;
+    }
+
+    .exp-company {
+      font-size: 13px;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+
+    .exp-company a {
+      color: var(--blue);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border-bottom: 1px dotted transparent;
+    }
+
+    .exp-company a:hover {
+      border-bottom-color: var(--blue);
+    }
+
+    .exp-agency-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      font-size: 11px;
+      padding: 3px 12px;
+      border-radius: 100px;
+      margin-bottom: 10px;
+    }
+
+    .exp-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+
+    .skill-group-label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-faint);
+      margin-bottom: 1.25rem;
+    }
+
+    .skill-bar {
+      margin-bottom: 14px;
+    }
+
+    .skill-bar-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .skill-bar-track {
+      height: 3px;
+      background: var(--border);
+      border-radius: 100px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--blue), var(--blue-mid));
+      animation: fillAnimation 1.2s ease-out;
+      position: relative;
+    }
+
+    @keyframes fillAnimation {
+      from { width: 0 !important; }
+    }
+
+    /* EDUCATION */
+    .edu-item {
+      display: flex;
+      gap: 1.25rem;
+      padding: 1.75rem 0;
+      border-bottom: 0.5px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .edu-item:hover {
+      background: rgba(24, 95, 165, 0.02);
+      margin: 0 -1.5rem;
+      padding: 1.75rem 1.5rem;
+      border-radius: var(--radius-md);
+    }
+
+    .edu-item:first-of-type { padding-top: 0; }
+    .edu-item:last-of-type { border-bottom: none; padding-bottom: 0; }
+
+    .edu-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: var(--blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: transform 0.3s ease;
+    }
+
+    .edu-item:hover .edu-icon {
+      transform: scale(1.1) rotate(-5deg);
+    }
+
+    .edu-body h3 { font-size: 15px; font-weight: 500; margin-bottom: 3px; }
+    .edu-inst { font-size: 13px; color: var(--blue); margin-bottom: 6px; }
+
+    .edu-body p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .edu-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .edu-badge {
+      font-size: 11px;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      padding: 3px 12px;
+      border-radius: 100px;
+      transition: all 0.2s ease;
+    }
+
+    .edu-badge:hover {
+      background: var(--blue);
+      color: white;
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      background: var(--card);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .contact-link:hover {
+      border-color: var(--blue);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(24, 95, 165, 0.12);
+    }
+
+    .contact-link-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      background: var(--blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .contact-link:hover .contact-link-icon {
+      transform: scale(1.1);
+    }
+
+    .contact-link-text {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .contact-link-sub {
+      font-size: 11px;
+      color: var(--text-faint);
+      font-weight: 300;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 0.5px solid var(--border);
+      text-align: center;
+      padding: 2.5rem 2rem;
+      font-size: 12px;
+      color: var(--text-faint);
+    }
+
+    .scroll-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--blue-mid));
+      z-index: 1001;
+      transition: width 0.1s ease;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { gap: 1.25rem; }
+      .hero { padding: 4rem 1.25rem 3.5rem; }
+      .container { padding: 0 1.25rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .edu-item { flex-direction: column; gap: 0.75rem; }
+      .exp-item:hover { margin: 0; padding: 1.75rem 0; }
+      .edu-item:hover { margin: 0; padding: 1.75rem 0; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Curriculum Vitae</h1>
-        <div class="section">
-            <h2>Personal Information</h2>
-            <p><strong>Name:</strong> John Doe</p>
-            <p><strong>Email:</strong> john.doe@example.com</p>
-            <p><strong>Phone:</strong> (123) 456-7890</p>
-        </div>
-        <div class="section">
-            <h2>Education</h2>
-            <p><strong>B.Sc. in Computer Science</strong>, University of Example, 2020</p>
-        </div>
-        <div class="section">
-            <h2>Work Experience</h2>
-            <p><strong>Software Developer</strong>, Example Corp, 2020 - Present</p>
-        </div>
-        <div class="section">
-            <h2>Skills</h2>
-            <ul>
-                <li>JavaScript</li>
-                <li>HTML & CSS</li>
-                <li>Python</li>
-            </ul>
-        </div>
+
+  <div class="scroll-indicator"></div>
+
+  <nav>
+    <a href="#" class="nav-logo">Ryan Krause</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">
+      <div class="hero-tag-dot"></div>
+      Open to opportunities
     </div>
+    <h1>Finance student.<br><em>Digital strategist.</em><br>Natural communicator.</h1>
+    <p class="hero-sub">A driven, bilingual student at Stellenbosch University — studying Financial Management with Business Analytics — who brings genuine commercial experience, sharp written instincts, and a reputation for getting things done.</p>
+    <div class="hero-actions">
+      <a href="mailto:ryankrause2006@gmail.com" class="btn-primary">Get in touch</a>
+      <a href="https://www.freelancer.com/u/RyanKrause" class="btn-outline" target="_blank" rel="noopener">View freelancer profile ↗</a>
+    </div>
+    <div class="hero-pills">
+      <span class="pill">Cape Town & Stellenbosch</span>
+      <span class="pill">English & Afrikaans</span>
+      <span class="pill">Finance · Marketing · Analytics</span>
+      <span class="pill">Social Media Management</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="sec-label">About</div>
+      <h2 class="sec-title">Calculated thinking.<br>Consistent results.</h2>
+      <p class="sec-intro">I pair a natural ease with people with a genuine appetite for complexity. Whether it's managing high-profile social media accounts, organising intricate workflows, or navigating the demands of a rigorous finance degree — I bring the same standard: focused, thorough, and unwilling to settle for less than the job requires.</p>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-card-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#185FA5" stroke-width="1.5"><circle cx="9" cy="9" r="7"/><path d="M9 4v5l3 2"/></svg>
+          </div>
+          <h3>An expert at "getting things done"</h3>
+          <p>Adaptable by nature and determined by character — I meet unfamiliar challenges head-on and deliver, regardless of how steep the learning curve is.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#185FA5" stroke-width="1.5"><path d="M2 13 L6 9 L10 12 L15 5"/></svg>
+          </div>
+          <h3>Analytically minded</h3>
+          <p>A strong foundation in mathematics, accounting and information systems means I approach problems with structure — not guesswork.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#185FA5" stroke-width="1.5"><path d="M3 5h12M3 9h8M3 13h5"/></svg>
+          </div>
+          <h3>Exceptional writer</h3>
+          <p>Recognised as one of the strongest English writers in his school — a skill that now underpins everything from social copy to strategic communication.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#185FA5" stroke-width="1.5"><circle cx="7" cy="7" r="3.5"/><circle cx="12" cy="12" r="3.5"/></svg>
+          </div>
+          <h3>Naturally extroverted</h3>
+          <p>Equally comfortable in a boardroom pitch or a one-on-one conversation — people skills aren't an afterthought, they are a genuine advantage.</p>
+        </div>
+      </div>
+      <div class="langs">
+        <div class="lang-card"><div class="lang-name">English</div><div class="lang-level">Native / Expert</div></div>
+        <div class="lang-card"><div class="lang-name">Afrikaans</div><div class="lang-level">Native / Fluent</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <div class="sec-label">Experience</div>
+      <h2 class="sec-title">Where theory meets practice.</h2>
+      <p class="sec-intro">From hospitality to high-growth digital media, each role has sharpened a different edge — communication, organisation, strategy, and creative execution.</p>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Social Media Manager</span>
+          <span class="exp-date">Late 2025 — Present</span>
+        </div>
+        <div class="exp-company">
+          <a href="https://www.mangofinds.com/" target="_blank" rel="noopener">Mangofinds Social Media Agency ↗</a>
+        </div>
+        <div class="exp-agency-tag">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#185FA5" stroke-width="1.5"><circle cx="6" cy="6" r="4.5"/><path d="M1.5 6h9M6 1.5a7 7 0 0 1 0 9M6 1.5a7 7 0 0 0 0 9"/></svg>
+          Successful digital media agency handling national & international podcast clients
+        </div>
+        <p class="exp-desc">Managing social strategy and content for a portfolio of large-scale podcasts — including an internationally-recognised show whose guests have included figures such as Elon Musk, Patrick Bet-David and Alex Hormozi. Responsibilities span content planning, copy, community management and workflow optimisation across national and international accounts.</p>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Freelance Project Manager</span>
+          <span class="exp-date">Ongoing</span>
+        </div>
+        <div class="exp-company">
+          <a href="https://www.freelancer.com/u/RyanKrause" target="_blank" rel="noopener">Freelancer.com ↗</a>
+        </div>
+        <p class="exp-desc">Sourcing and coordinating developers, designers and other specialists to deliver client briefs — from websites to app builds. Acts as the bridge between client requirements and technical execution, ensuring quality outcomes and on-time delivery.</p>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Administrative & Operations Assistant</span>
+          <span class="exp-date">Past</span>
+        </div>
+        <div class="exp-company">Various</div>
+        <p class="exp-desc">Handled both physical and digital file organisation, company phone operations, and the refinement of internal workflows — building a working knowledge of efficient office processes and professional business environments.</p>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Waiter</span>
+          <span class="exp-date">Past</span>
+        </div>
+        <div class="exp-company">Wimpy</div>
+        <p class="exp-desc">Customer-facing hospitality role that developed composure under pressure, clear communication and a service-first attitude — the kind of grounding that stays with you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="sec-label">Skills</div>
+      <h2 class="sec-title">A broad toolkit,<br>applied with precision.</h2>
+      <p class="sec-intro">Spanning the analytical and the interpersonal — the skills below reflect both formal study and hard-won practical experience.</p>
+      <div class="skills-grid">
+        <div>
+          <div class="skill-group-label">Technical & academic</div>
+          <div class="skill-bar"><div class="skill-bar-label"><span>Financial management</span><span>88%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:88%"></div></div></div>
+          <div class="skill-bar"><div class="skill-bar-label"><span>Financial accounting</span><span>82%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:82%"></div></div></div>
+          <div class="skill-bar"><div class="skill-bar-label"><span>Business analytics</span><span>78%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:78%"></div></div></div>
+          <div class="skill-bar"><div class="skill-bar-label"><span>Mathematics & statistics</span><span>80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+          <div class="skill-bar"><div class="skill-bar-label"><span>Information systems</span><span>75%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div></div>
+          <div class="skill-bar"><div class="skill-bar-label"><span>Delphi / coding basics</span><span>55%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:55%"></div></div></div>
+        </div>
+        <div>
+          <div class="skill-group-label">Professional & interpersonal</div>
+          <div class="skill-bar"><div class="skill-bar-label"><span>Written communication</span><span>95%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:95%"></div></div></div>
+          <div class="skill-bar"><div class="skill-bar-label"><span>Social media strategy</span><span>85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+          <div class="skill-bar"><div class="skill-bar-label"><span>Project coordination</span><span>80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+          <div class="skill-bar"><div class="skill-bar-label"><span>Marketing management</span><span>72%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:72%"></div></div></div>
+          <div class="skill-bar"><div class="skill-bar-label"><span>Entrepreneurial thinking</span><span>78%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:78%"></div></div></div>
+          <div class="skill-bar"><div class="skill-bar-label"><span>Workflow optimisation</span><span>76%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:76%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="container">
+      <div class="sec-label">Education</div>
+      <h2 class="sec-title">Built on strong foundations.</h2>
+
+      <div class="edu-item">
+        <div class="edu-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#185FA5" stroke-width="1.5"><path d="M2 8l8-5 8 5-8 5-8-5z"/><path d="M6 10.5v4.5c0 1.5 1.8 2.5 4 2.5s4-1 4-2.5v-4.5"/></svg>
+        </div>
+        <div class="edu-body">
+          <h3>BCom Financial Management (with Business Analytics)</h3>
+          <div class="edu-inst">Stellenbosch University</div>
+          <p>Currently in second year (of three), specialising in Financial Management supported by a strong Business Analytics focus. Current modules include Business Analytics, Marketing Management, Entrepreneurship & Innovation Strategy, and Financial Management.</p>
+          <div class="edu-meta">
+            <span class="edu-badge">2024 — Present</span>
+            <span class="edu-badge">Distinction: Information Systems (Yr 1)</span>
+            <span class="edu-badge">Strong performance: Economics (Yr 1)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#185FA5" stroke-width="1.5"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M8 10h4M10 8v4"/></svg>
+        </div>
+        <div class="edu-body">
+          <h3>National Senior Certificate</h3>
+          <div class="edu-inst">Stellenberg High School</div>
+          <p>Subjects included Business Studies, IT (Delphi), Chemistry, Physics, and both English and Afrikaans as Home Languages. Recognised as one of the school's top English writers. Represented the school in Hockey (2nd & 3rd Team) and Chess (1st Team), and also played Rugby and Cricket.</p>
+          <div class="edu-meta">
+            <span class="edu-badge">Graduated 2023</span>
+            <span class="edu-badge">Chess — 1st Team</span>
+            <span class="edu-badge">Hockey — 2nd & 3rd Team</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="sec-label">Contact</div>
+      <h2 class="sec-title">Let's talk.</h2>
+      <p class="sec-intro">Whether it's a project, a role, or just a conversation — I'm easy to reach and quick to respond.</p>
+      <div class="contact-grid">
+        <a href="mailto:ryankrause2006@gmail.com" class="contact-link">
+          <div class="contact-link-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#185FA5" stroke-width="1.5"><rect x="2" y="4" width="12" height="9" rx="1.5"/><path d="M2 5l6 4.5L14 5"/></svg>
+          </div>
+          <div>
+            <div class="contact-link-text">Email</div>
+            <div class="contact-link-sub">ryankrause2006@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://za.linkedin.com/in/ryan-krause-532941249" target="_blank" rel="noopener" class="contact-link">
+          <div class="contact-link-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#185FA5" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 7v4M5 5.2v.1M8 11V8.5a1.5 1.5 0 0 1 3 0V11M8 7v4"/></svg>
+          </div>
+          <div>
+            <div class="contact-link-text">LinkedIn</div>
+            <div class="contact-link-sub">ryan-krause-532941249</div>
+          </div>
+        </a>
+        <a href="https://www.instagram.com/1ryan.k/" target="_blank" rel="noopener" class="contact-link">
+          <div class="contact-link-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#185FA5" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="3"/><circle cx="8" cy="8" r="2.5"/><circle cx="11.2" cy="4.8" r="0.6" fill="#185FA5"/></svg>
+          </div>
+          <div>
+            <div class="contact-link-text">Instagram</div>
+            <div class="contact-link-sub">@1ryan.k</div>
+          </div>
+        </a>
+        <a href="https://www.freelancer.com/u/RyanKrause" target="_blank" rel="noopener" class="contact-link">
+          <div class="contact-link-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#185FA5" stroke-width="1.5"><path d="M2 11l4-4 3 3 5-7"/><circle cx="13" cy="4" r="1" fill="#185FA5"/></svg>
+          </div>
+          <div>
+            <div class="contact-link-text">Freelancer</div>
+            <div class="contact-link-sub">RyanKrause</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Ryan Krause &mdash; Stellenbosch, South Africa &mdash; 2025</p>
+  </footer>
+
+  <script>
+    // Scroll progress indicator
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      document.querySelector('.scroll-indicator').style.width = scrollPercent + '%';
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Stagger animation for elements
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = `fadeInUp 0.6s ease-out ${index * 0.1}s both`;
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.exp-item, .edu-item, .about-card').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
 </body>
 </html>
